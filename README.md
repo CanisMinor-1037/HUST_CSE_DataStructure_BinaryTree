@@ -1,3 +1,3 @@
 # HUST_CSE_DataStructure_BinaryTree
-HUST_CSE 数据结构二叉树实验
+华中科技大学网络空间安全学院数据结构二叉树实验
 By CanisMinor
