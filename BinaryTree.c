@@ -311,7 +311,7 @@ void PostOrderTraverse(BinTree BT)
 void LevelOrderTraverse(BinTree BT)
 {
 	Queue Q;
-    BinTree T;
+    	BinTree T;
 	if(!BT) return;/*若是空树直接返回*/
 	Q=CreateQueue();/*创建并初始化队列Q*/
 	AddQ(Q,BT);
@@ -348,10 +348,10 @@ void CreateHTree(HTree *PtrBT)
 	{
 		*PtrBT=(HTree)malloc(sizeof(HTreeNode));
 		(*PtrBT)->Data=value;
-        (*PtrBT)->Parent=Parent(root[Cur_Num],*PtrBT);
-        CreateHTree(&((*PtrBT)->Left));
-        CreateHTree(&((*PtrBT)->Right));
-    }
+        	(*PtrBT)->Parent=Parent(root[Cur_Num],*PtrBT);
+        	CreateHTree(&((*PtrBT)->Left));
+        	CreateHTree(&((*PtrBT)->Right));
+    	}
 }/* Num:31 */
 
 void IndexTable(HTree BT,IndexLink *PtrHC)
@@ -362,40 +362,40 @@ void IndexTable(HTree BT,IndexLink *PtrHC)
     int length;
     int i;
     char temp;
-	Stack S= CreateStack(); /*创建并初始化堆栈S*/
-	while(BT||!IsEmptyS(S))
+    Stack S= CreateStack(); /*创建并初始化堆栈S*/
+    while(BT||!IsEmptyS(S))
+    {
+	while(BT)/*一直向左并将沿途结点压入堆栈*/
 	{
-		while(BT)/*一直向左并将沿途结点压入堆栈*/
-		{
-			Push(S,BT);
-			BT=BT->Left;
-		}
-		if(!IsEmptyS(S))
-		{
-			BT=Pop(S);/*结点弹出堆栈*/
-			if(BT->Left==NULL&&BT->Right==NULL)
-            {
-                HTree TEMP=BT;
-                L->Next=(IndexLink)malloc(sizeof(IndexNode));
-                L=L->Next;
-                L->Data=BT->Data;
-                memset(L->Code,'\0',MAXSIZE);
-                for(length=0;BT!=root[Cur_Num];)
-                {
-                    HTree Pre=BT;
-                    BT=BT->Parent;
-                    if(BT->Left==Pre) L->Code[length++]='0';
-                    else L->Code[length++]='1';
-                }
-                for(i=0;i<strlen(L->Code)/2;i++)
-                {
-                    temp=L->Code[i];
-                    L->Code[i]=L->Code[strlen(L->Code)-i-1];
-                    L->Code[strlen(L->Code)-i-1]=temp;
-                }
-                BT=TEMP;
-            }
-			BT=BT->Right;/*转向右子树*/
+		Push(S,BT);
+		BT=BT->Left;
+	}
+	if(!IsEmptyS(S))
+	{
+		BT=Pop(S);/*结点弹出堆栈*/
+		if(BT->Left==NULL&&BT->Right==NULL)
+            	{
+                	HTree TEMP=BT;
+                	L->Next=(IndexLink)malloc(sizeof(IndexNode));
+                	L=L->Next;
+                	L->Data=BT->Data;
+                	memset(L->Code,'\0',MAXSIZE);
+                	for(length=0;BT!=root[Cur_Num];)
+                	{
+                	 	HTree Pre=BT;
+                    		BT=BT->Parent;
+                    		if(BT->Left==Pre) L->Code[length++]='0';
+                    		else L->Code[length++]='1';
+                	}
+                	for(i=0;i<strlen(L->Code)/2;i++)
+                	{
+                		temp=L->Code[i];
+                    		L->Code[i]=L->Code[strlen(L->Code)-i-1];
+                    		L->Code[strlen(L->Code)-i-1]=temp;
+                	}
+                	BT=TEMP;
+            	}
+		BT=BT->Right;/*转向右子树*/
         }
     }
     L=NULL;
@@ -502,61 +502,61 @@ int main(void)
    	
     while (op) 
     {
-	    system("clear");	
+	system("clear");	
         printf("\n\n");
-		printf("      Menu for Binary Tree On Doubly Linked List \n");
-		printf("------------------------------------------------------\n");
-		printf("      1. InitBinTree            2. DestroyBinTree\n");   
-		printf("      3. CreateBinTree          4. ClearBinTree\n");
-		printf("      5. IsEmptyBinTree         6. BinTreeDepth\n");
-		printf("      7. Root                   8. Value\n");
-		printf("      9. Assign                10. Parent\n");
-		printf("     11. LeftChild             12. RightChild\n");  
-		printf("     13. LeftSibling           14. RightSibling\n");
-		printf("     15. InsertChild           16. DeleteChild\n");          
+	printf("      Menu for Binary Tree On Doubly Linked List \n");
+	printf("------------------------------------------------------\n");
+	printf("      1. InitBinTree            2. DestroyBinTree\n");   
+	printf("      3. CreateBinTree          4. ClearBinTree\n");
+	printf("      5. IsEmptyBinTree         6. BinTreeDepth\n");
+	printf("      7. Root                   8. Value\n");
+	printf("      9. Assign                10. Parent\n");
+	printf("     11. LeftChild             12. RightChild\n");  
+	printf("     13. LeftSibling           14. RightSibling\n");
+	printf("     15. InsertChild           16. DeleteChild\n");          
         printf("     17. PreOrderTraverse      18. InOrderTraverse\n");
         printf("     19. PostOrderTraverse     20. LevelOrderTraverse\n"); 
-		printf("     29. SetBTNum              31. CreateHTree\n");
+	printf("     29. SetBTNum              31. CreateHTree\n");
         printf("     32. HTreeCode             33. HTreeDecode\n");
         printf("     34. StringCheck           35. CodeCheck\n");
         printf("------------------------------------------------------\n");
-		printf("       当前操作的树序号：%d   请选择你的操作[0~35]:\n",Cur_Num);
-		scanf("%d",&op);
+	printf("       当前操作的树序号：%d   请选择你的操作[0~35]:\n",Cur_Num);
+	scanf("%d",&op);
         getchar();
-		switch(op) 
+	switch(op) 
         {
 		case 1:
 			status=InitBinTree(&root[Cur_Num]);
-            Cur_BT=root[Cur_Num];
-            if(status==TRUE) printf("二叉树初始化成功\n");
-            else printf("二叉树初始化失败\n");
+            		Cur_BT=root[Cur_Num];
+            		if(status==TRUE) printf("二叉树初始化成功\n");
+            		else printf("二叉树初始化失败\n");
 			getchar();
 			break;
 		case 2:
 			DestroyBinTree(&root[Cur_Num]);
-            if(!root[Cur_Num]) printf("二叉树销毁成功\n");
-            else printf("二叉树销毁失败\n");
+            		if(!root[Cur_Num]) printf("二叉树销毁成功\n");
+            		else printf("二叉树销毁失败\n");
 			getchar();
 			break;
 		case 3:
-            CreateBinTree(&root[Cur_Num]);
-            Cur_BT=root[Cur_Num];
-            if(Cur_BT) printf("二叉树创建成功\n");
-            else printf("二叉树创建失败\n");
-            getchar();
+            		CreateBinTree(&root[Cur_Num]);
+            		Cur_BT=root[Cur_Num];
+            		if(Cur_BT) printf("二叉树创建成功\n");
+            		else printf("二叉树创建失败\n");
+            		getchar();
 			getchar();
 			break;
 		case 4:
 			ClearBinTree(&root[Cur_Num]);
-            if(root[Cur_Num]->Data=='^') printf("二叉树清空成功\n");
-            else printf("二叉树清空失败\n");
-            Cur_BT=NULL;
+          		if(root[Cur_Num]->Data=='^') printf("二叉树清空成功\n");
+            		else printf("二叉树清空失败\n");
+            		Cur_BT=NULL;
 			getchar();
 			break;
 		case 5:
-            if(!root[Cur_Num]) printf("二叉树未创建\n");
-            else if(IsEmptyBinTree(root[Cur_Num])) printf("空二叉树\n");
-            else printf("二叉树非空\n");
+            		if(!root[Cur_Num]) printf("二叉树未创建\n");
+            		else if(IsEmptyBinTree(root[Cur_Num])) printf("空二叉树\n");
+            		else printf("二叉树非空\n");
 			getchar();
 			break;
 		case 6:
@@ -565,75 +565,75 @@ int main(void)
 			break;
 		case 7:
 			Cur_BT=Root();
-            printf("%c\n",Value(&Cur_BT));
+            		printf("%c\n",Value(&Cur_BT));
 			getchar();
 			break;
 		case 8:
 			value=Value(&Cur_BT);
-            printf("%c\n",value);
+           	 	printf("%c\n",value);
 			getchar();
 			break;
 		case 9:
-            scanf("%c",&value);
-            getchar();
+            		scanf("%c",&value);
+            		getchar();
 			Cur_BT=Assign(&Cur_BT,value);
-            if(Cur_BT&&Cur_BT->Data==value) printf("赋值成功\n");
-            else printf("赋值失败\n");
+            		if(Cur_BT&&Cur_BT->Data==value) printf("赋值成功\n");
+            		else printf("赋值失败\n");
 			getchar();
 			break;
 		case 10:
-		    Cur_BT=Parent(root[Cur_Num],Cur_BT);
-            printf("%c\n",Value(&Cur_BT));
+		    	Cur_BT=Parent(root[Cur_Num],Cur_BT);
+            		printf("%c\n",Value(&Cur_BT));
 			getchar();
 			break;
 		case 11:
-            Pre_BT=Cur_BT;
+            		Pre_BT=Cur_BT;
 			Cur_BT=LeftChild(Cur_BT);
-            if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
-            else printf("^\n");
-            Pre_BT=NULL;
-		    getchar();
+            		if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
+            		else printf("^\n");
+            		Pre_BT=NULL;
+		    	getchar();
 			break;
 		case 12:
-            Pre_BT=Cur_BT;
+            		Pre_BT=Cur_BT;
 			Cur_BT=RightChild(Cur_BT);
-            if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
-            else printf("^\n");
-            Pre_BT=NULL;
+            		if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
+            		else printf("^\n");
+            		Pre_BT=NULL;
 			getchar();
 			break;
 		case 13:
-            Pre_BT=Cur_BT;
+            		Pre_BT=Cur_BT;
 			Cur_BT=LeftSibling(root[Cur_Num],Cur_BT);
-            if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
-            else printf("^\n");
-            Pre_BT=NULL;
+            		if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
+            		else printf("^\n");
+            		Pre_BT=NULL;
 			getchar();
 			break;
 		case 14:
-            Pre_BT=Cur_BT;
+            		Pre_BT=Cur_BT;
 			Cur_BT=RightSibling(root[Cur_Num],Cur_BT);
-            if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
-            else printf("^\n");
-            getchar();
+            		if(Pre_BT!=Cur_BT) printf("%c\n",Value(&Cur_BT));
+            		else printf("^\n");
+            		getchar();
 			break;
 		case 15:
-            printf("请输入左(L)/右(R)以及二叉树序号\n");
+            		printf("请输入左(L)/右(R)以及二叉树序号\n");
 			scanf("%c %d",&LR,&Num);
-            getchar();
-            InsertChild(&Cur_BT,LR,Num);
-            if(root[0]) 
-            {
-                DestroyBinTree(&root[0]);
-            }
-            getchar();
+            		getchar();
+            		InsertChild(&Cur_BT,LR,Num);
+            		if(root[0]) 
+            		{
+                		DestroyBinTree(&root[0]);
+            		}
+            		getchar();
 			break;
 		case 16:
 			printf("请输入左(L)/右(R)\n");
-            scanf("%c",&LR);
-            getchar();
-            DeleteChild(&Cur_BT,LR);
-            getchar();
+            		scanf("%c",&LR);
+            		getchar();
+            		DeleteChild(&Cur_BT,LR);
+            		getchar();
 			break;
 		case 17:
 			PreOrderTraverse(root[Cur_Num]);
@@ -643,101 +643,101 @@ int main(void)
 			InOrderTraverse(root[Cur_Num]);
 			getchar();
 			break;
-        case 19:
-            PostOrderTraverse(root[Cur_Num]);
-            getchar();
-            break;
-        case 20:
-            LevelOrderTraverse(root[Cur_Num]);
-            getchar();
-            break;
-        case 29:
-            if(Cur_BT) PRESERVED_BT[Cur_Num]=Cur_BT;
-            status=SetBTNum();
-            if(PRESERVED_BT[Cur_Num]) Cur_BT=PRESERVED_BT[Cur_Num];
-            else Cur_BT=root[Cur_Num];
-            if(status==TRUE) printf("位序设置成功\n");
-            else printf("位序设置失败\n");
-            getchar();
-            getchar();
-            break;
-        case 31:
-            CreateHTree(&root[Cur_Num]);
-            Cur_BT=root[Cur_Num];
-            if(Cur_BT) 
-            {
-                printf("哈夫曼树创建成功\n");
-                IndexTable(root[Cur_Num],&HC);
-            }
-            else printf("哈夫曼树创建失败\n");
-            getchar();
-            getchar();
-            break;
-        case 32:
-            memset(IN_str,'\0',STRLEN);
-            memset(OUT_code,'\0',4*STRLEN);
-            for(L=HC->Next;L;L=L->Next)
-            {
-                printf("[%c] %s\n",L->Data,L->Code);
-            }
-            fgets(IN_str,STRLEN,stdin);
-            find=strchr(IN_str,'\n');
-            if(find)
-            {
-                *find='\0';
-            }
-            HTreeCode(IN_str,OUT_code,HC);
-            printf("%s\n",OUT_code);
-            getchar();
-            break;
-        case 33:
-            memset(IN_code,'\0',4*STRLEN);
-            memset(OUT_str,'\0',STRLEN);
-            for(L=HC->Next;L;L=L->Next)
-            {
-                printf("[%c] %s\n",L->Data,L->Code);
-            }
-            printf("\n");
-            fgets(IN_code,4*STRLEN,stdin);
-            find=strchr(IN_code,'\n');
-            if(find)
-            {
-                *find='\0';
-            }
-            HTreeDecode(OUT_str,IN_code,HC);
-            printf("%s\n",OUT_str);
-            getchar();
-            break;
-        case 34:
-            memset(IN_str,'\0',STRLEN);
-            memset(OUT_code,'\0',4*STRLEN);
-            fgets(IN_str,STRLEN,stdin);
-            find=strchr(IN_str,'\n');
-            if(find)
-            {
-                *find='\0';
-            }
-            printf("%d\n",StringCheck(IN_str,HC));
-            getchar();
-            break;
-        case 35:
-            memset(IN_code,'\0',4*STRLEN);
-            memset(OUT_str,'\0',STRLEN);
-            fgets(IN_code,4*STRLEN,stdin);
-            find=strchr(IN_code,'\n');
-            if(find)
-            {
-                *find='\0';
-            }
-            printf("%d\n",CodeCheck(IN_code,HC));
-            getchar();
-            break;
+        	case 19:
+            		PostOrderTraverse(root[Cur_Num]);
+            		getchar();
+            		break;
+        	case 20:
+            		LevelOrderTraverse(root[Cur_Num]);
+            		getchar();
+            		break;
+        	case 29:
+            		if(Cur_BT) PRESERVED_BT[Cur_Num]=Cur_BT;
+            		status=SetBTNum();
+            		if(PRESERVED_BT[Cur_Num]) Cur_BT=PRESERVED_BT[Cur_Num];
+            		else Cur_BT=root[Cur_Num];
+            		if(status==TRUE) printf("位序设置成功\n");
+            		else printf("位序设置失败\n");
+            		getchar();
+            		getchar();
+            		break;
+        	case 31:
+            		CreateHTree(&root[Cur_Num]);
+            		Cur_BT=root[Cur_Num];
+            		if(Cur_BT) 
+            		{
+                		printf("哈夫曼树创建成功\n");
+                		IndexTable(root[Cur_Num],&HC);
+            		}
+            		else printf("哈夫曼树创建失败\n");
+            		getchar();
+            		getchar();
+            		break;
+        	case 32:
+            		memset(IN_str,'\0',STRLEN);
+            		memset(OUT_code,'\0',4*STRLEN);
+            		for(L=HC->Next;L;L=L->Next)
+            		{
+                		printf("[%c] %s\n",L->Data,L->Code);
+            		}
+            		fgets(IN_str,STRLEN,stdin);
+            		find=strchr(IN_str,'\n');
+            		if(find)
+            		{
+                		*find='\0';
+            		}
+            		HTreeCode(IN_str,OUT_code,HC);
+            		printf("%s\n",OUT_code);
+            		getchar();
+            		break;
+        	case 33:
+            		memset(IN_code,'\0',4*STRLEN);
+            		memset(OUT_str,'\0',STRLEN);
+            		for(L=HC->Next;L;L=L->Next)
+           		{
+                		printf("[%c] %s\n",L->Data,L->Code);
+            		}
+            		printf("\n");
+            		fgets(IN_code,4*STRLEN,stdin);
+            		find=strchr(IN_code,'\n');
+            		if(find)
+            		{
+                		*find='\0';
+            		}
+            		HTreeDecode(OUT_str,IN_code,HC);
+            		printf("%s\n",OUT_str);
+            		getchar();
+            		break;
+        	case 34:
+            		memset(IN_str,'\0',STRLEN);
+            		memset(OUT_code,'\0',4*STRLEN);
+            		fgets(IN_str,STRLEN,stdin);
+            		find=strchr(IN_str,'\n');
+            		if(find)
+            		{
+                		*find='\0';
+            		}
+            		printf("%d\n",StringCheck(IN_str,HC));
+            		getchar();
+            		break;
+        	case 35:
+            		memset(IN_code,'\0',4*STRLEN);
+            		memset(OUT_str,'\0',STRLEN);
+            		fgets(IN_code,4*STRLEN,stdin);
+            		find=strchr(IN_code,'\n');
+            		if(find)
+            		{
+                		*find='\0';
+            		}
+            		printf("%d\n",CodeCheck(IN_code,HC));
+            		getchar();
+            		break;
 		case 0:
 			break;
-		}
 	}
-	printf("欢迎下次再使用本系统！\n");
-	return 0;
+    }
+    printf("欢迎下次再使用本系统！\n");
+    return 0;
 }
 
 
