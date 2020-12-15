@@ -13,7 +13,7 @@ typedef struct TreeNode{
 	char Data;
 	BinTree Left;
 	BinTree Right;
-    BinTree Parent; /*建立哈夫曼树时使用*/
+    	BinTree Parent; /*建立哈夫曼树时使用*/
 }TreeNode;
 
 BinTree root[NR];
@@ -22,9 +22,9 @@ int Cur_Num;
 typedef TreeNode HTreeNode;
 typedef BinTree HTree;
 typedef struct IndexNode{
-    char Data;
-    char Code[MAXSIZE]; /*Path*/
-    struct IndexNode *Next;
+    	char Data;
+    	char Code[MAXSIZE]; /*Path*/
+    	struct IndexNode *Next;
 }IndexNode, *IndexLink;
 
 typedef struct QNode{
